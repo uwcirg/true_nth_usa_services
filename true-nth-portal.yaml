@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-  description: Alpha version of the True NTH portal RESTful API, to be used by True NTH intervention applications.
+  description: Alpha version of the True NTH portal RESTful API, to be used by True NTH intervention applications. Can be found at https://raw.githubusercontent.com/uwcirg/true_nth_usa_services/master/true-nth-portal.yaml 
   version: "1.0.0"
   title: True NTH Portal
   termsOfService: http://cirg.washington.edu
@@ -70,7 +70,7 @@ paths:
         "200":
           description: successful operation
           schema:
-            $ref: "#/definitions/Patient"
+            $ref: "#/definitions/Clinical"
         "400":
           description: Invalid ID supplied
       security:
@@ -123,7 +123,7 @@ definitions:
     externalDocs:
       url: http://www.hl7.org/fhir/patient.html
     required:
-      - name
+      - id
     properties:
       id:
         type: integer
@@ -184,6 +184,30 @@ definitions:
         type: string
       given:
         type: string
+
+  Clinical:
+    properties:
+      TNM-Condition-stage:
+        description: TNM staging for prostate cancer. This is a bit of a mashup - not doing full FHIR Condition, as that seems like overkill here. Do we want this to be machine interpretable? If so, we might want to formalize the "summary". 
+        type: object
+        externalDocs:
+          url: https://www.hl7.org/fhir/condition.html ; https://www.hl7.org/fhir/condition-definitions.html#Condition.stage
+        properties:
+          summary: 
+            $ref: "#/definitions/CodeableConcept"
+            example: "T1 N0 M0"
+        
+  CodeableConcept:
+    externalDocs:
+      url: https://www.hl7.org/fhir/datatypes.html#CodeableConcept
+    type: object
+      properties:
+        coding:
+          type: string
+        text:
+          type: string
+          example: "T1 N0 M0"
+          
   Order:
     properties:
       id:
