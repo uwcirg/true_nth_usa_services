@@ -53,14 +53,14 @@ paths:
         - patient
       summary: Get patient clinical data
       description: Returns a patient's clinical data (eg TNM, Gleason score). If patientId isn't passed, the authenticated user's clinical data are returned
-      operationId: getPatientById
+      operationId: getClinicalByPatientId
       produces:
         - application/json
         - application/xml
       parameters:
         - in: path
           name: patientId
-          description: ID of patient that needs to be fetched
+          description: ID of patient
           required: false
           type: integer
           format: int64
@@ -196,6 +196,8 @@ definitions:
           summary: 
             $ref: "#/definitions/CodeableConcept"
             example: "T1 N0 M0"
+      Gleason-score:
+        description: SNOMED-CT coded. http://phinvads.cdc.gov/vads/ViewCodeSystemConcept.action?oid=2.16.840.1.113883.6.96&code=372278000
         
   CodeableConcept:
     externalDocs:
