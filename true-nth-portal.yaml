@@ -133,15 +133,18 @@ definitions:
       birthDate:
         type: string
         format: date-time
-        externalDocs: (use a different tag for this?) http://www.hl7.org/fhir/patient-definitions.html#Patient.birthDate
+        externalDocs:
+          url: http://www.hl7.org/fhir/patient-definitions.html#Patient.birthDate
       communication:
         type: string
         description: preferred language
         example: es-MX, en-US
-        externalDocs: http://www.hl7.org/fhir/patient-definitions.html#Patient.communication
+        externalDocs: 
+          url: http://www.hl7.org/fhir/patient-definitions.html#Patient.communication
       telecom:
         type: array
-        externalDocs: http://www.hl7.org/fhir/patient-definitions.html#Patient.telecom
+        externalDocs: 
+          url: http://www.hl7.org/fhir/patient-definitions.html#Patient.telecom
         items:
           system: 
             type: string
