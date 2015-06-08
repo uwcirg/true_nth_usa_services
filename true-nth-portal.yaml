@@ -52,7 +52,7 @@ paths:
       tags:
         - patient
       summary: Get patient clinical data
-      description: Returns a patient's clinical data (eg TNM, Gleason score). If patientId isn't passed, the authenticated user's demographics data are returned
+      description: Returns a patient's clinical data (eg TNM, Gleason score). If patientId isn't passed, the authenticated user's clinical data are returned
       operationId: getPatientById
       produces:
         - application/json
@@ -120,16 +120,18 @@ definitions:
       name:
         type: string
   Patient:
+    externalDocs:
+      url: http://www.hl7.org/fhir/patient.html
     required:
       - name
-      - photoUrls
     properties:
       id:
         type: integer
         format: int64
       name:
-        type: string
-        example: doggie
+        externalDocs:
+          url: http://www.hl7.org/fhir/patient-definitions.html#Patient.name
+        $ref: "#/definitions/HumanName"        
       birthDate:
         type: string
         format: date-time
@@ -173,6 +175,14 @@ definitions:
         type: integer
         format: int64
       name:
+        type: string
+  HumanName:
+    externalDocs:
+      url: http://www.hl7.org/fhir/datatypes.html#HumanName
+    properties:
+      family:
+        type: string
+      given:
         type: string
   Order:
     properties:
