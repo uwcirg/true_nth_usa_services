@@ -200,13 +200,12 @@ definitions:
   CodeableConcept:
     externalDocs:
       url: https://www.hl7.org/fhir/datatypes.html#CodeableConcept
-    type: object
-      properties:
-        coding:
-          type: string
-        text:
-          type: string
-          example: "T1 N0 M0"
+    properties:
+      coding:
+        type: string
+      text:
+        type: string
+        example: "T1 N0 M0"
           
   Order:
     properties:
