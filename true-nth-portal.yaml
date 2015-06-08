@@ -127,11 +127,30 @@ definitions:
       id:
         type: integer
         format: int64
-      category:
-        $ref: "#/definitions/Category"
       name:
         type: string
         example: doggie
+      birthDate:
+        type: string
+        format: date-time
+        externalDocs: (use a different tag for this?) http://www.hl7.org/fhir/patient-definitions.html#Patient.birthDate
+      communication:
+        type: string
+        description: preferred language
+        example: es-MX, en-US
+        externalDocs: http://www.hl7.org/fhir/patient-definitions.html#Patient.communication
+      telecom:
+        type: array
+        externalDocs: http://www.hl7.org/fhir/patient-definitions.html#Patient.telecom
+        items:
+          system: 
+            type: string
+            example: email | phone
+          value:
+            type: string
+            example: helloworld@movember.com; (123) 456-7890
+      category:
+        $ref: "#/definitions/Category"
       photoUrls:
         type: array
         items:
