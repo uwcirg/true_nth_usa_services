@@ -146,13 +146,14 @@ definitions:
         externalDocs: 
           url: http://www.hl7.org/fhir/patient-definitions.html#Patient.telecom
         items:
-          type: string
-#          system: 
-#            type: string
-#            example: email | phone
-#          value:
-#            type: string
-#            example: helloworld@movember.com; (123) 456-7890
+          type: object
+          properties:
+            system: 
+              type: string
+              example: email | phone
+            value:
+              type: string
+              example: helloworld@movember.com; (123) 456-7890
       category:
         $ref: "#/definitions/Category"
       photoUrls:
