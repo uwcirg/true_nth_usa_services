@@ -154,7 +154,7 @@ definitions:
   Clinical:
     properties:
       TNM-Condition-stage:
-        description: TNM staging for prostate cancer. This is a bit of a mashup - not doing full FHIR Condition, as that seems like overkill here. Do we want this to be machine interpretable? If so, we might want to formalize the "summary". 
+        description: TNM staging for prostate cancer. This is a bit of a mashup - not doing full FHIR Condition, as that seems like overkill here. Do we want this to be machine interpretable? If so, we might want to formalize the "summary". Note that using the HL7/FHIR "summary" property here is a little confusing, since swagger has its own use of the summary element (which is more about documenting the service). 
         type: object
         externalDocs:
           url: https://www.hl7.org/fhir/condition.html ; https://www.hl7.org/fhir/condition-definitions.html#Condition.stage
@@ -163,8 +163,9 @@ definitions:
             $ref: "#/definitions/CodeableConcept"
             example: "T1 N0 M0"
       Gleason-score:
-        description: SNOMED-CT coded. http://phinvads.cdc.gov/vads/ViewCodeSystemConcept.action?oid=2.16.840.1.113883.6.96&code=372278000
-        
+        description: Includes a sum (2-10) of the primary and secondary pattern scores (both of which are 1-5). SNOMED-CT coded. http://phinvads.cdc.gov/vads/ViewCodeSystemConcept.action?oid=2.16.840.1.113883.6.96&code=372278000. 
+        example: "5 ( 2 + 3)"
+
   CodeableConcept:
     externalDocs:
       url: https://www.hl7.org/fhir/datatypes.html#CodeableConcept
