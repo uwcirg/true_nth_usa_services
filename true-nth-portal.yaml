@@ -74,6 +74,20 @@ paths:
         - patientportal_auth:
           - write_patients
           - read_patients
+  /portal-wrapper-html:
+    get:
+      summary: Get html for the portal site UI wrapper (top-level nav elements, etc)
+      description: ""
+      operationId: portal-wrapper-html
+      produces:
+        - text/html
+      responses:
+        "200":
+          description: successful operation
+        "404":
+          description: Portal wrapper html not found
+        "500":
+          description: Portal internal server error
 securityDefinitions:
   api_key:
     type: apiKey
