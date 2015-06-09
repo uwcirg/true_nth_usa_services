@@ -16,18 +16,18 @@ basePath: /portal/api
 schemes:
   - http
 paths:
-  /demographics/{patientId}:
+  /demographics:
     get:
       summary: Get patient demographics
-      description: Returns a patient's demographics fields (eg first name, last name, DOB, email, cell phone). If patientId isn't passed, the authenticated user's demographics data are returned
+      description: "Returns a patient's demographics fields (eg first name, last name, DOB, email, cell phone). If patientId isn't passed, the authenticated user's demographics data are returned"
       operationId: getPatientById
       produces:
         - application/json
         - application/xml
       parameters:
-        - in: path
+        - in: query
           name: patientId
-          description: ID of patient that needs to be fetched
+          description: True NTH patient ID
           required: false
           type: integer
           format: int64
@@ -45,18 +45,18 @@ paths:
         - patientportal_auth:
           - write_patients
           - read_patients
-  /clinical/{patientId}:
+  /clinical:
     get:
       summary: Get patient clinical data
-      description: Returns a patient's clinical data (eg TNM, Gleason score). If patientId isn't passed, the authenticated user's clinical data are returned
+      description: "Returns a patient's clinical data (eg TNM, Gleason score). If patientId isn't passed, the authenticated user's clinical data are returned."
       operationId: getClinicalByPatientId
       produces:
         - application/json
         - application/xml
       parameters:
-        - in: path
+        - in: query
           name: patientId
-          description: ID of patient
+          description: True NTH patient ID
           required: false
           type: integer
           format: int64
