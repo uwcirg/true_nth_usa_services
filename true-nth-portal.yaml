@@ -1,7 +1,7 @@
 swagger: "2.0"
 info:
-  description: Alpha version of the True NTH portal RESTful API, to be used by True NTH intervention applications. Can be found at https://raw.githubusercontent.com/uwcirg/true_nth_usa_services/master/true-nth-portal.yaml 
-  version: "1.0.0". This API attempts to conform with the HL7 FHIR specification as much as is reasonable.
+  description: Alpha version of the True NTH portal RESTful API, to be used by True NTH intervention applications. Can be found at https://raw.githubusercontent.com/uwcirg/true_nth_usa_services/master/true-nth-portal.yaml . This API attempts to conform with the HL7 FHIR specification as much as is reasonable.
+  version: "1.0.0"
   title: True NTH Portal
   termsOfService: http://cirg.washington.edu
   contact:
