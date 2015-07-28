@@ -19,15 +19,15 @@ paths:
   /demographics:
     get:
       summary: Get patient demographics
-      description: "Returns a patient's demographics fields (eg first name, last name, DOB, email, cell phone). If patientId isn't passed, the authenticated user's demographics data are returned"
+      description: "Returns a patient's demographics fields (eg first name, last name, DOB, email, cell phone)."
       operationId: getPatientById
       produces:
         - application/json
         - application/xml
       parameters:
-        - in: query
-          name: patientId
-          description: True NTH patient ID
+        - name: patientId
+          in: query
+          description: True NTH patient ID. If patientId isn't passed, the authenticated user's ID is used.
           required: false
           type: integer
           format: int64
@@ -48,16 +48,51 @@ paths:
   /clinical:
     get:
       summary: Get patient clinical data
-      description: "Returns a patient's clinical data (eg TNM, Gleason score). If patientId isn't passed, the authenticated user's clinical data are returned."
+      description: "Returns a patient's clinical data (eg TNM, Gleason score)."
       operationId: getClinicalByPatientId
       produces:
         - application/json
         - application/xml
       parameters:
-        - in: query
-          name: patientId
-          description: True NTH patient ID
+        - name: patientId
+          in: query
+          description: True NTH patient ID. If patientId isn't passed, the authenticated user's ID is used.
           required: false
+          type: integer
+          format: int64
+      responses:
+        "404":
+          description: Patient not found
+        "200":
+          description: successful operation
+          schema:
+            $ref: "#/definitions/Clinical"
+        "400":
+          description: Invalid ID supplied
+      security:
+        - api_key: []
+        - patientportal_auth:
+          - write_patients
+          - read_patients
+  /questionnaire:
+    get:
+      summary: Get patient's responses to questionnaires 
+      description: "Returns a patient's responses to questionnaires/assessments presented by the portal's assessment engine."
+      operationId: getQuestionnaireByPatientId
+      produces:
+        - application/json
+        - application/xml
+      parameters:
+        - name: patientId
+          in: query
+          description: True NTH patient ID. If patientId isn't passed, the authenticated user's ID is used.
+          required: false
+          type: integer
+          format: int64
+        - name: questionnaireId
+          in: query
+          description: True NTH patient ID
+          required: true
           type: integer
           format: int64
       responses:
@@ -175,3 +210,41 @@ definitions:
       text:
         type: string
         example: "T1 N0 M0"
+
+  Questionnaire:
+    description: A patient's responses to a questionnaire (single standardized instrument), and metadata about the presentation and context of the questionnaire. 
+    externalDocs:
+      url: http://www.hl7.org/implement/standards/fhir/questionnaire.html
+    properties:
+      status:
+        externalDocs:
+          url: http://www.hl7.org/implement/standards/fhir/questionnaire-status.html
+        description: "in progress" | "completed" 
+        type: string
+      subject:
+        description: Only need return Patient.id here.
+        $ref: "#/definitions/Patient"        
+        externalDocs:
+          url: http://www.hl7.org/implement/standards/fhir/questionnaire-definitions.html#Questionnaire.subject
+      name:
+        descriptions: The name of the instrument presented (eg PHQ-9, EPIC-26). Instrument name set TBD. FHIR specifies coded concepts for this but I think that's overly complex for our purposes, for now at least (http://www.hl7.org/implement/standards/fhir/valueset-questionnaire-name.html)
+        type: string
+      encounter:
+        description: The encounter during which the patient completed the assessment. This is currently constrained to a True NTH portal or intervention encounter. 
+        type: object
+        externalDocs:
+          url: http://www.hl7.org/implement/standards/fhir/encounter.html
+        properties:
+          period:
+            description: The datetime of the patient's last interaction with the questionnaire.
+            type: datetime
+            externalDocs:
+              url: http://www.hl7.org/implement/standards/fhir/search.html#date
+      group:
+        description: We may not do much with this, as the standardized instrument is at the top Questionnaire level...
+        type: object
+        externalDocs:
+          url: http://www.hl7.org/implement/standards/fhir/questionnaire-definitions.html#Questionnaire.group
+        properties:
+          question: 
+            description: THIS OBVIOUSLY NEEDS TO BE REFACTORED FOR n QUESTIONS / GROUP...
