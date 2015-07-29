@@ -212,7 +212,7 @@ definitions:
         example: "T1 N0 M0"
 
   Questionnaire:
-    description: A patient's responses to a questionnaire (single standardized instrument), and metadata about the presentation and context of the questionnaire. 
+    description: A patient's responses to a questionnaire (a set of instruments, some standardized, some not), and metadata about the presentation and context of the assessment session (date, etc). 
     externalDocs:
       url: http://www.hl7.org/implement/standards/fhir/questionnaire.html
     properties:
@@ -242,7 +242,7 @@ definitions:
             externalDocs:
               url: http://www.hl7.org/implement/standards/fhir/search.html#date
       group:
-        description: We may not do much with this, as the standardized instrument is at the top Questionnaire level...
+        description: Grouping of individual instruments presented during this assessment session, standardized or otherwise.
         type: object
         externalDocs:
           url: http://www.hl7.org/implement/standards/fhir/questionnaire-definitions.html#Questionnaire.group
