@@ -101,7 +101,7 @@ paths:
         "200":
           description: successful operation
           schema:
-            $ref: "#/definitions/Clinical"
+            $ref: "#/definitions/Questionnaire"
         "400":
           description: Invalid ID supplied
       security:
@@ -219,7 +219,7 @@ definitions:
       status:
         externalDocs:
           url: http://www.hl7.org/implement/standards/fhir/questionnaire-status.html
-        description: "in progress" | "completed" 
+        description: "'in progress' or 'completed'"
         type: string
       subject:
         description: Only need return Patient.id here.
@@ -227,7 +227,7 @@ definitions:
         externalDocs:
           url: http://www.hl7.org/implement/standards/fhir/questionnaire-definitions.html#Questionnaire.subject
       name:
-        descriptions: The name of the instrument presented (eg PHQ-9, EPIC-26). Instrument name set TBD. FHIR specifies coded concepts for this but I think that's overly complex for our purposes, for now at least (http://www.hl7.org/implement/standards/fhir/valueset-questionnaire-name.html)
+        description: The name of the instrument presented (eg PHQ-9, EPIC-26). Instrument name set TBD. FHIR specifies coded concepts for this but I think that's overly complex for our purposes, for now at least (http://www.hl7.org/implement/standards/fhir/valueset-questionnaire-name.html)
         type: string
       encounter:
         description: The encounter during which the patient completed the assessment. This is currently constrained to a True NTH portal or intervention encounter. 
@@ -236,8 +236,9 @@ definitions:
           url: http://www.hl7.org/implement/standards/fhir/encounter.html
         properties:
           period:
-            description: The datetime of the patient's last interaction with the questionnaire.
-            type: datetime
+            description: The datetime of the patients last interaction with the questionnaire.
+            type: string
+            format: date-time
             externalDocs:
               url: http://www.hl7.org/implement/standards/fhir/search.html#date
       group:
